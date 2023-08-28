@@ -1,2 +1,2 @@
 # Practice
-for team practice
+I love programming.
