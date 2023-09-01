@@ -1,0 +1,19 @@
+html, body {
+    height: 100%;
+}
+
+#landingpageBG {
+    background: url(landingpage.jpg) center center no-repeat;
+    color: white;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#message {
+    color: red;
+    width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
