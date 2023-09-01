@@ -22,6 +22,7 @@ app.get("/landingPage", (req, res) => {
     res.render("landingpage.ejs")
 });
 
+// Create Profile Data
 app.post("/createProfile", (req, res) => {
     let profile = req.body.profile
     // send data to database
@@ -32,6 +33,7 @@ app.post("/createProfile", (req, res) => {
     })
 })
 
+// Read/View Profile Data
 app.get("/viewProfile", (req, res) => {
     // need to access database
     // send back all fields or just specific
@@ -44,6 +46,7 @@ app.get("/viewProfile", (req, res) => {
     })
 })
 
+// DELETE Profile Data
 app.delete("/profile/:id", (req, res) => {
     let user_id = req.params.user_id
     // mongoose had a method called findByIdAndDelete()
@@ -58,6 +61,7 @@ app.delete("/profile/:id", (req, res) => {
     })
 });
 
+// UPDATE Profile Data
 app.put("profile/:id", (req, res) => {
     UserProfileModel.findById(req.params.id)
     .then(result => {
