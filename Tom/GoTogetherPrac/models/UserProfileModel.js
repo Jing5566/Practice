@@ -5,7 +5,8 @@ const UserProfileSchema = mongoose.Schema({
         type: String,
         maxLength: [20, "Must be less than 20 characters."],
         required: [true, "First name must be entered."]
-    },
+    }
+    ,
     Last_Name: {
         type: String,
         maxLength: [20, "Must be less than 20 characters."],
