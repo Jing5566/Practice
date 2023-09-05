@@ -70,6 +70,7 @@ app.get("/createProfilePage", (req, res) => {
 // also have two buttons, one that says edit profile, and the other says
 // back to home page
 app.get("/viewProfilePage", (req, res) => {
+    const Profiles = Profile.find({});
     res.render("viewProfilePage.ejs")
 });
 
