@@ -13,7 +13,7 @@ require('./connections/mongoconnection')
 
 const { application } = require("express");
 // we need to import our model(s)
-const { FirstAndLastModel } = require("./models/FirstAndLastModel");
+const FirstAndLastName = require('./models/FirstAndLastModel')
 
 // Basic route that sends you to the landing page if you didnt specify
 // the account url with anything
@@ -49,6 +49,19 @@ app.get("/signupPage", (req, res) => {
 app.get("/createProfilePage", (req, res) => {
     res.render("createProfilePage.ejs")
 });
+
+// This was a testing route to see if I could send mock data to the
+// database, it worked!
+// app.get("/firstLast", (req, res) => {
+//     const Fname_Lname = new FirstAndLastName({
+//         First_Name: 'Thomas',
+//         Last_Name: 'Smith'
+//     })
+//     Fname_Lname.save();
+//     res.send(Fname_Lname)
+// })
+
+
 
 // READ
 // If you click the profile button option in the account dropbox,
