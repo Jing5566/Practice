@@ -11,76 +11,87 @@ app.use(express.urlencoded({ extended: false}));
 // inserts into file
 require('./connections/mongoconnection')
 
+const { application } = require("express");
 // we need to import our model(s)
-const { UserProfileModel } = require("./models/UserProfileModel");
+const { FirstAndLastModel } = require("./models/FirstAndLastModel");
 
+// Basic route that sends you to the landing page if you didnt specify
+// the account url with anything
 app.get("/", (req, res) => {
     res.redirect("/landingPage")
 });
 
+// This is the first page that loads upon using the command
+// node index.js, it will have a page that has a textbox greeting you
+// to our website with two buttons that ask if you would like to login
+// *this button just takes you to the homepage for now*, or sign up
+// *this button takes you to a dummy signup page*, both buttons
+// just route you to different pages until we have account auth figured out
 app.get("/landingPage", (req, res) => {
-    res.render("landingpage.ejs")
+    res.render("landingPage.ejs")
 });
 
-// Create Profile Data
-app.post("/createProfile", (req, res) => {
-    let profile = req.body.profile
-    // send data to database
-    UserProfileModel.create({profile})
-    .then(result => res.json(result))
-    .catch(error => {
-        res.status(445).json({message: "Unable to create data"})
-    })
-})
-
-// Read/View Profile Data
-app.get("/viewProfile", (req, res) => {
-    // need to access database
-    // send back all fields or just specific
-    // need to access database
-    // convert dat from database into usable format
-    UserProfileModel.find({})
-    .catch(error => {
-        console.log(`Error with reading data: `, error.message)
-        res.status(444).json({message: "Unable to read data"});
-    })
-})
-
-// DELETE Profile Data
-app.delete("/profile/:id", (req, res) => {
-    let user_id = req.params.user_id
-    // mongoose had a method called findByIdAndDelete()
-    // access db
-    UserProfileModel.findByIdAndDelete(user_id)
-    .then(result => {
-        res.json(result)
-    })
-    .catch(err => {
-        console.log(`Error deleting from db:`, err.message)
-        res.status(466).json({message: "Unable to delete profile data"})
-    })
+// This is the page that loads if you pressed the Signup button
+// on the landing page, this will have three textboxes asking you to provide
+// your desired Email:, Password:, and Password Confirmation: *these are just
+// textboxes with no purpose until we have figured out account auth* as well
+// as two buttons, one takes you back to the landing page, the other takes
+// you to the createProfilePage
+app.get("/signupPage", (req, res) => {
+    res.render("signupPage.ejs")
 });
 
-// UPDATE Profile Data
-app.put("profile/:id", (req, res) => {
-    UserProfileModel.findById(req.params.id)
-    .then(result => {
-        // enter data that is going to be updated
-        // EXAMPLE DATA
-        result.save()
-        .then(updatedResult => {
-            res.json(updatedResult)
-        })
-        .catch(error => {
-            console.log(`Error updateing profile data in db:`, err.message);
-            res.status(488).json({message: "Unable to find updated with id"})
-        })
-    })
-    .catch(err => {
-        console.log(`Error updating data profile data from db:`, err.message)
-        res.status(477).json({message: "Unable to find data to update with id"})
-    });
-})
+// CREATE
+// This page will have a form with various textboxes asking you to provide
+// your profiles information, only 3 are hard required to be able to submit
+// your account, once you have filled out at least those three fields,
+// pressing the Submit button will take you to the home page
+app.get("/createProfilePage", (req, res) => {
+    res.render("createProfilePage.ejs")
+});
 
+// READ
+// If you click the profile button option in the account dropbox,
+// this will trigger a route handler that displays your profile
+// with the information that user passed to the database, it will
+// also have two buttons, one that says edit profile, and the other says
+// back to home page
+app.get("/viewProfilePage", (req, res) => {
+    res.render("viewProfilePage.ejs")
+});
 
+// API Functionality 
+// This route will show you a summary of your favorite movie!
+// This uses the TMDB API to display your favorite movie
+app.get("/movieInfoPage", (req, res) => {
+    res.render("movieInfoPage.ejs")
+});
+
+// UPDATE
+// This page will show you a copy of your profile and will allow you
+// to edit the textboxes, once you hit submit, it will change the data
+// in the database to what your changes are
+app.get("updateProfilePage", (req, res) => {
+    res.render("updateProfilePage.ejs")
+});
+
+// DELETE
+// This page will show a paragraph asking if you would like to delete your
+// account's information, two buttons are here, one that says no and
+// redirects you too the home page, and a yes button that will trigger
+// a route that will delete your information and redirect you to the
+// landing page
+app.get("deleteProfilePage", (req, res) => {
+    res.render("deleteProfilePage.ejs")
+});
+
+// This page will have a mock up calandar, an event, and your account
+// dropdown options, one allowing you to edit your profile and the other
+// allowing you to delete your account information
+app.get("homeDashboardPage", (req, res) => {
+    res.render("homeDashboardPage.ejs")
+});
+
+// This just tells us what port the app is going to be on, and what
+// to confirm if we actually connect to it
 app.listen(port, () => console.log(`Tom's PracProject on port ${port}`));

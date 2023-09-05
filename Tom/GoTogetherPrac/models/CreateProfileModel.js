@@ -1,12 +1,11 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const UserProfileSchema = mongoose.Schema({
+const CreateProfileSchema = mongoose.Schema({
     First_Name: {
         type: String,
         maxLength: [20, "Must be less than 20 characters."],
         required: [true, "First name must be entered."]
-    }
-    ,
+    },
     Last_Name: {
         type: String,
         maxLength: [20, "Must be less than 20 characters."],
@@ -15,6 +14,9 @@ const UserProfileSchema = mongoose.Schema({
     Birthday: {
         type: Date,
         required: [true, "Birthdate must be entered."]
+    },
+    Profile_Image: {
+        type: String
     },
     Age_Range: {
         type: String
@@ -45,13 +47,7 @@ const UserProfileSchema = mongoose.Schema({
     },
     Languages: {
         type: String
-    },
-    More_About_You: {
-        type: String
-    },
-    Profile_Image: {
-        type: String
     }
 });
 
-exports.UserProfileModel = mongoose.model("user_data", UserProfileSchema)
+exports.CreateProfileModel = mongoose.model("profile_data", CreateProfileSchema)
