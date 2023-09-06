@@ -52,14 +52,14 @@ app.get("/createProfilePage", (req, res) => {
 
 // This was a testing route to see if I could send mock data to the
 // database, it worked!
-// app.get("/firstLast", (req, res) => {
-//     const Fname_Lname = new FirstAndLastName({
-//         First_Name: 'Thomas',
-//         Last_Name: 'Smith'
-//     })
-//     Fname_Lname.save();
-//     res.send(Fname_Lname)
-// })
+app.get("/firstLast", (req, res) => {
+    const Fname_Lname = new FirstAndLastName({
+        First_Name: 'Jing',
+        Last_Name: 'Xiao'
+    })
+    Fname_Lname.save();
+    res.send(Fname_Lname)
+})
 
 
 
