@@ -13,6 +13,7 @@ require('./connections/mongoconnection')
 
 const { application } = require("express");
 // we need to import our model(s)
+const CreateProfile = require('./models/CreateProfileModel')
 const FirstAndLastName = require('./models/FirstAndLastModel')
 
 // Basic route that sends you to the landing page if you didnt specify
@@ -50,16 +51,39 @@ app.get("/createProfilePage", (req, res) => {
     res.render("createProfilePage.ejs")
 });
 
+// Another Test Route, more data entered, it worked!
+// app.get("/profileCreate", (req, res) => {
+//     const C_Profile = new CreateProfile({
+//         First_Name: 'Thomas',
+//         Last_Name: 'Smith',
+//         Birthday: '1994-01-25',
+//         Profile_Image: 'https://m.media-amazon.com/images/M/MV5BMTQ0NjgzNzcwNV5BMl5BanBnXkFtZTcwODExMDYxOQ@@._V1_.jpg',
+//         Age: 29,
+//         Gender: 'Male',
+//         Current_City: 'San Antonio',
+//         Hometown: 'Laredo',
+//         Profession: 'Programmer',
+//         Interests: 'Videogames, Godzilla, Lockpicking',
+//         Favorite_Movie: 'Titanic',
+//         Favorite_Artist: 'Joji',
+//         Favorite_Food: 'Enchiladas',
+//         Languages: 'English',
+//         Summary_Of_You: 'I am a nerdy guy who likes to program and play videogames!'
+//     })
+//     C_Profile.save();
+//     res.send(C_Profile)
+// })
 // This was a testing route to see if I could send mock data to the
 // database, it worked!
-app.get("/firstLast", (req, res) => {
-    const Fname_Lname = new FirstAndLastName({
-        First_Name: 'Jing',
-        Last_Name: 'Xiao'
-    })
-    Fname_Lname.save();
-    res.send(Fname_Lname)
-})
+// app.get("/firstLast", (req, res) => {
+//     const Fname_Lname = new FirstAndLastName({
+//         First_Name: '',
+//         Last_Name: ''
+//     })
+//     Fname_Lname.save();
+//     res.send(Fname_Lname)
+// })
+
 
 
 
@@ -69,8 +93,8 @@ app.get("/firstLast", (req, res) => {
 // with the information that user passed to the database, it will
 // also have two buttons, one that says edit profile, and the other says
 // back to home page
-app.get("/viewProfilePage", (req, res) => {
-    const Profiles = Profile.find({});
+app.get("/viewProfilePage/:id", (req, res) => {
+    
     res.render("viewProfilePage.ejs")
 });
 

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const CreateProfileSchema = mongoose.Schema({
     First_Name: {
@@ -18,8 +18,8 @@ const CreateProfileSchema = mongoose.Schema({
     Profile_Image: {
         type: String
     },
-    Age_Range: {
-        type: String
+    Age: {
+        type: Number
     },
     Gender: {
         type: String
@@ -47,7 +47,10 @@ const CreateProfileSchema = mongoose.Schema({
     },
     Languages: {
         type: String
+    },
+    Summary_Of_You: {
+        type: String
     }
 });
 
-exports.CreateProfileModel = mongoose.model("profile_data", CreateProfileSchema)
+module.exports = mongoose.model("profile_data", CreateProfileSchema)

@@ -1,9 +1,23 @@
-Attemping to send Profile Data to mongoDB
-Need to make a form to submit data to the DB
-Need a page to view the data that has been stored in the DB
-Need to be able to delete a profile from the database
-Need to be able to Update the information that is already stored in the database
+// This was a testing route to see if I could send mock data to the
+// database, it worked!
+app.get("/firstLast", (req, res) => {
+    const Fname_Lname = new FirstAndLastName({
+        First_Name: '',
+        Last_Name: ''
+    })
+    Fname_Lname.save();
+    res.send(Fname_Lname)
+})
 
+// This is the model I used to activate this route
+const mongoose = require('mongoose');
 
-Need to keep notes on the names of our Routes, all of which will be camelCase
-All models and schemas will be PascalCase
+const FirstAndLastSchema = mongoose.Schema({
+    First_Name: String,
+    Last_Name: String
+});
+
+module.exports = mongoose.model("firstlastdata", FirstAndLastSchema);
+
+// You need this line in the index.js file to activate the model
+ const FirstAndLastName = require('./models/FirstAndLastModel')
