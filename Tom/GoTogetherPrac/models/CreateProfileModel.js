@@ -53,4 +53,4 @@ const CreateProfileSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("profile_data", CreateProfileSchema)
+module.exports = mongoose.model("Profiles", CreateProfileSchema)

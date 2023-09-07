@@ -14,7 +14,7 @@ require('./connections/mongoconnection')
 const { application } = require("express");
 // we need to import our model(s)
 const CreateProfile = require('./models/CreateProfileModel')
-const FirstAndLastName = require('./models/FirstAndLastModel')
+// const FirstAndLastName = require('./models/FirstAndLastModel')
 
 // Basic route that sends you to the landing page if you didnt specify
 // the account url with anything
@@ -93,8 +93,8 @@ app.get("/createProfilePage", (req, res) => {
 // with the information that user passed to the database, it will
 // also have two buttons, one that says edit profile, and the other says
 // back to home page
-app.get("/viewProfilePage/:id", (req, res) => {
-    
+app.get("/viewProfilePage", (req, res) => {
+
     res.render("viewProfilePage.ejs")
 });
 
