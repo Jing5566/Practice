@@ -3,6 +3,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.static("public"));
 
+// we need to import our model(s)
+const Profiles = require('./models/CreateProfileModel')
+
 //Body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
@@ -10,11 +13,6 @@ app.use(express.urlencoded({ extended: false}));
 // pulls ALL code from mongoconnection and
 // inserts into file
 require('./connections/mongoconnection')
-
-const { application } = require("express");
-// we need to import our model(s)
-const CreateProfile = require('./models/CreateProfileModel')
-// const FirstAndLastName = require('./models/FirstAndLastModel')
 
 // Basic route that sends you to the landing page if you didnt specify
 // the account url with anything
@@ -57,9 +55,9 @@ app.get("/createProfilePage", (req, res) => {
 // with the information that user passed to the database, it will
 // also have two buttons, one that says edit profile, and the other says
 // back to home page
-app.get("/viewProfilePage", (req, res) => {
-
-    res.render("viewProfilePage.ejs")
+app.get("/viewProfilePage", async (req, res) => {
+    const Profile = await Profiles.find({});
+    res.render("viewProfilePage.ejs", { Profile })
 });
 
 // API Functionality 
